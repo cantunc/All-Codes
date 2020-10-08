@@ -1,37 +1,30 @@
-## Welcome to GitHub Pages
+import serial
+import time
+ser = serial.Serial('COM4', 9800)
+time.sleep(2)
 
-You can use the [editor on GitHub](https://github.com/cantunc/All-Codes/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+user_input1 = 'L'
+while user_input1 != 'q':
+    user_input1 = input('Y = Yellow Light, R = Red Light, G = Green Light, q = quit :'  )
+    if user_input1 == 'Y':
+        user_input2 = input('H = on, L = off, q = quit :'  )
+        if user_input2 == 'H':
+            user_input2 = 'S'
+        byte_command = user_input2.encode()
+        ser.write(byte_command)   # send a byte
+        time.sleep(0.5) # wait 0.5 seconds
+    if user_input1 == 'R':
+        user_input2 = input('H = on, L = off, q = quit :'  )
+        if user_input2 == 'H':
+            user_input2 = 'K'
+        byte_command = user_input2.encode()
+        ser.write(byte_command)   # send a byte
+        time.sleep(0.5) # wait 0.5 seconds
+    if user_input1 == 'G':
+        user_input2 = input('H = on, L = off, q = quit :'  )
+        byte_command = user_input2.encode()
+        ser.write(byte_command)   # send a byte
+        time.sleep(0.5) # wait 0.5 seconds
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
-
-### Markdown
-
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
-
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/cantunc/All-Codes/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+print('q entered. Exiting the program')
+ser.close()
